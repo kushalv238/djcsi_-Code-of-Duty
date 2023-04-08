@@ -3,9 +3,28 @@ import Card from "../components/Card";
 import TableRow from "../components/TableRow";
 import { useState } from "react";
 
-
 const HeroSection = () => {
   const [data, setData] = useState([
+    {
+      profile: "/images/icon1.png",
+      name: "Kushal",
+      contact: "9819778654",
+      aadhaar: "18.55",
+      workingHr: "09hr 02min",
+      breakTime: "45min",
+      extraHr: "(+)30min",
+      status: "Late",
+    },
+    {
+      profile: "/images/icon1.png",
+      name: "Kushal",
+      contact: "9819778654",
+      aadhaar: "18.55",
+      workingHr: "09hr 02min",
+      breakTime: "45min",
+      extraHr: "(+)30min",
+      status: "Late",
+    },
     {
       profile: "/images/icon1.png",
       name: "Kushal",
@@ -49,8 +68,8 @@ const HeroSection = () => {
               Manage Now
             </button>
           </div>
-          <div className="mr-10 mt-16">
-            <img src="/images/hero.png" alt="" />
+          <div className="mr-10 mt-10">
+            <img src="/images/cup.png" alt="" />
           </div>
         </div>
       </div>
@@ -70,10 +89,10 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      <table>
+      <table className="m-7 w-full">
         <thead>
           <tr>
-            <th>Profile</th>
+            <th className="flex justify-center">Profile</th>
             <th>Name of Employee</th>
             <th>Contact</th>
             <th>Aadhaar</th>
