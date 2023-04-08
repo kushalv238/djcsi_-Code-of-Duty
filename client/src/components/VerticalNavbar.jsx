@@ -8,56 +8,64 @@ import {
 } from "react-icons/ai";
 import { BsFillPeopleFill, BsGraphDown } from "react-icons/bs";
 import { IoMdNotifications } from "react-icons/io";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHome, faPeopleGroup, faCube, faChartBar } from "@fortawesome/free-solid-svg-icons";
+
+import "../stylesheets/sidebar.css";
+
 const VerticalNavbar = () => {
   return (
-    <div className="h-screen bg-blue text-white font-poppins">
-      <div className="p-10 text-center w-[100%] flex flex-row">
-        <div className="mr-5">
+    <div id="sidebar">
+      <div className="logo">
+        <div className="logo-img">
           <img src="" alt="logo" />
         </div>
-        <div className="text-xl">Name</div>
+        <div className="logo-title">
+          <p>Name</p>
+        </div>
       </div>
       <div>
-        <ul className="my-5 ml-[30px] flex-col">
-          <div className="flex flew-row m-2 items-center mb-6">
-            <AiOutlineHome />
-            <li className="ml-6">
+        <ul className="list">
+          <div className="list-item">
+            <FontAwesomeIcon icon={faHome} />
+            <li className="list-item-title">
               <Link to="/">Home</Link>
             </li>
           </div>
-          <div className="flex flex-row m-2 items-center mb-6">
+          <div className="list-item">
             <BsFillPeopleFill />
-            <li className="ml-6">
+            <li className="list-item-title">
               <Link to="/employee">Employee</Link>
             </li>
           </div>
-          <div className="flex flex-row m-2 items-center mb-6">
+          <div className="list-item">
             <AiOutlineAppstore />
-            <li className="ml-6">
+            <li className="list-item-title">
               <Link to="/report">Report</Link>
             </li>
           </div>
-          <div className="flex flex-row m-2 items-center mb-6">
+          <div className="list-item">
             <BsGraphDown />
-            <li className="ml-6">
+            <li className="list-item-title">
               <Link to="/recommend">Recommended</Link>
             </li>
           </div>
-          <div className="flex flex-row m-2 items-center mb-6">
+          <div className="list-item">
             <IoMdNotifications />
-            <li className="ml-6">
+            <li className="list-item-title">
               <Link to="/notifications">Notification</Link>
             </li>
           </div>
-          <div className="flex flex-row m-2 items-center mb-6">
+          <div className="list-item">
             <AiOutlineCreditCard />
-            <li className="ml-6">
+            <li className="list-item-title">
               <Link to="/billing">Billing</Link>
             </li>
           </div>
-          <div className="flex flex-row m-2 items-center mb-6 ">
+          <div className="list-item ">
             <AiFillSetting />
-            <li className="ml-6">
+            <li className="list-item-title">
               <Link to="/setting">Settings</Link>
             </li>
           </div>

@@ -1,0 +1,13 @@
+main {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main-content {
+    width: 85%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}

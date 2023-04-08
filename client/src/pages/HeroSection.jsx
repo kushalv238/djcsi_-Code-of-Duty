@@ -89,7 +89,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      <table className="m-7 w-full">
+      <table className="">
         <thead>
           <tr>
             <th className="flex justify-center">Profile</th>

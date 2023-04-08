@@ -1,0 +1,49 @@
+#sidebar {
+  border: 1px solid pink;
+  width: 15%;
+  background-color: #3e54ac;
+}
+
+.logo {
+  display: flex;
+  flex-wrap: wrap;
+
+  margin: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.logo-img {
+  width: 40%;
+}
+
+.logo-title {
+  width: 60%;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  color: white;
+  background-color: #3e54ac;
+}
+
+.list-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 70%;
+  color: white;
+  text-decoration: none;
+
+  /* border: 1px solid red; */
+}
+
+.list-item-title {
+  margin-left: 1rem;
+}
+
+/* .list-item > * {
+    width: 50%;
+} */
