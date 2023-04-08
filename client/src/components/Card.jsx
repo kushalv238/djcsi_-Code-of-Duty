@@ -2,18 +2,18 @@ import React from "react";
 
 const Card = () => {
   return (
-    <div className="wrapper flex flex-col w-[200px]">
-      <div className="employee w-full flex flex-row ">
-        <div className="-translate-y-10">
+    <div id="card">
+      <div className="employee-info">
+        <div className="employee-img">
           <img src="/images/icon1.png" alt="" />
         </div>
-        <div className="ml-2 flex flex-col">
+        <div className="employee-status">
           <div>Active Employee</div>
           <div>1081</div>
         </div>
       </div>
-      <hr className="h-1 my-4 px-0 bg-gray-200 border-0 dark:bg-black"></hr>
-      <div className="date w-full">
+      <hr></hr>
+      <div className="date">
         <span>8th April 2023</span>
       </div>
     </div>

@@ -8,7 +8,7 @@ const TableRow = (props) => {
       <td>{props.name}</td>
       <td>{props.contact}</td>
       <td>{props.aadhaar}</td>
-      <td>{props.workingHr}</td>
+      <td>{props.workerType}</td>
       <td>{props.breakTime}</td>
       <td>{props.extraHr}</td>
       <td>{props.status}</td>

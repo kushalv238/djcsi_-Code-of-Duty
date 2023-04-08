@@ -1,7 +1,7 @@
-import React from "react";
+import '../stylesheets/navbar.css';
 
 const Navbar = () => {
-  return <div className="w-full h-10 bg-secondary">Navbar</div>;
+  return <div id="navbar">Navbar</div>;
 };
 
 export default Navbar;

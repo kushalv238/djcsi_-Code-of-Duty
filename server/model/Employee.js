@@ -16,6 +16,10 @@ const employeeSchema = new mongoose.Schema({
     current_address: {
         type: String
     },
+    role: {
+        type: String,
+        required: true
+    },
     resume: {
         type: String,
         default: ''
@@ -27,6 +31,10 @@ const employeeSchema = new mongoose.Schema({
     pan_number: {
         type: String,
         required: true
+    },
+    experience: {
+        type: Number,
+        default: 0
     },
     flags: {
         red: {type: Number, default: 0},
