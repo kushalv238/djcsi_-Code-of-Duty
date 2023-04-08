@@ -53,38 +53,26 @@ const createNewEmployee = asyncHandler(async (req, res) => {
 
 
 
-// @desc Deleting a employee
-// @route DELETE /employee
+// @desc patching a employee
+// @route PATCH /employee
 // @access Private
 const updateEmployee = asyncHandler(async (req, res) => {
-    // const { username, id, title, text, completed } = req.body;
+    const { _id, flags } = req.body;
 
-    // if(!id || !username || !title || !text) {
-    //     return res.status(400).json({ message: "Enter all information" })
-    // }
+    if(!_id) {
+        return res.status(400).json({ message: "Enter all information" })
+    }
 
-    // const userID = await User.findOne({ username }, { _id: true }).lean().exec();
-    // if(!userID) {
-    //     return res.status(400).json({ message: "No such user found" });
-    // }
-    
-    // const noteToUpdate = await Note.findById(id).exec();
-    // if(!noteToUpdate) {
-    //     return res.status(400).json({ message: "No such note found" });
-    // }
-    
-    // const findDuplicate = await Note.findOne({ title }).lean().exec();
-    // if(findDuplicate && findDuplicate?._id.toString() !== id) {
-    //     return res.status(409).json({ message: 'Duplicate note title' });
-    // }
+    const employeeToUpdate = await Employee.findOne({ _id }).exec();
+    if(!employeeToUpdate) {
+        return res.status(400).json({ message: "No such employee found" });
+    }
 
-    // noteToUpdate.title = title;
-    // noteToUpdate.text = text;
-    // noteToUpdate.completed = completed;
+    employeeToUpdate.flags = flags;
 
-    // const updatedNote = await noteToUpdate.save();
+    const updatedEmployee = await employeeToUpdate.save();
 
-    // res.json({ message: `Note ${updatedNote.title} updated` });
+    res.json({ message: `Employee ${updatedEmployee.first_name} updated` });
 })
 
 
