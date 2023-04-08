@@ -1,3 +1,5 @@
+import img from '../images/hero.png'
+
 const Employee = (props) => {
     return (
         <div
@@ -12,9 +14,11 @@ const Employee = (props) => {
                     <h2 className='bold'>{props.title}</h2>
                     <p>{props.description}</p>
                 </div>
-                <div className="prod-price">
-                    <p className='bold'>Rs. {props.price}</p>
-                </div>
+            </div>
+            <div className="prod-flags">
+                <div className="flag"><img src={img} alt="img" /></div>
+                <div className="flag"><img src={img} alt="img" /></div>
+                <div className="flag"><img src={img} alt="img" /></div>
             </div>
         </div>
     )

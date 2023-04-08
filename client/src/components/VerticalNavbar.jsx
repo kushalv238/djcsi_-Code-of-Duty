@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 
-import { faHome, faUsers, faFile, faChartLine, faBell, faCreditCard, faGear } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faHome, faUsers, faFile, faChartLine, faBell, faCreditCard, faGear, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import ListItem from './ListItem';
 
 import "../stylesheets/sidebar.css";
 
 const VerticalNavbar = (props) => {
+	const handleLogout = () => {
+		localStorage.removeItem("token");
+		window.location.reload();
+	};
+
 	return (
 		<div id="sidebar">
 			<div className="logo">
@@ -16,7 +23,7 @@ const VerticalNavbar = (props) => {
 					<p>Name</p>
 				</div>
 			</div>
-			<div>
+			<div className="list-wrapper">
 				<ul className="list">
 					<ListItem title="Home" icon={faHome} link="/" className={`${props.page === 0 ? ' at-page' : ''}`} setPage={props.setPage} pageID={0} />
 					<ListItem title="Employee" icon={faUsers} link="/employees" className={`${props.page === 1 ? ' at-page' : ''}`} setPage={props.setPage} pageID={1} />
@@ -26,6 +33,12 @@ const VerticalNavbar = (props) => {
 					<ListItem title="Billing" icon={faCreditCard} link="/" className={`${props.page === 5 ? ' at-page' : ''}`} setPage={props.setPage} pageID={5} />
 					<ListItem title="Settings" icon={faGear} link="/" className={`${props.page === 6 ? ' at-page' : ''}`} setPage={props.setPage} pageID={6} />
 				</ul>
+			</div>
+			<div className="logout-button">
+				<div className="logout-button-wrapper" onClick={handleLogout}>
+					<FontAwesomeIcon icon={faRightFromBracket} />
+					<p>Logout</p>
+				</div>
 			</div>
 		</div>
 	);

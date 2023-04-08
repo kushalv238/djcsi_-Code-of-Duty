@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
 	lastName: { type: String, required: true },
 	email: { type: String, required: true },
 	password: { type: String, required: true },
-	flagOf: {type: String},
 	flagsGiven: [
 		{
 			"employee": {type: mongoose.Schema.Types.ObjectId, ref: "Employee"},
@@ -40,9 +39,7 @@ const validate = (data) => {
 		firstName: Joi.string().required().label("First Name"),
 		lastName: Joi.string().required().label("Last Name"),
 		email: Joi.string().email().required().label("Email"),
-		password: passwordComplexity().required().label("Password"),
-		flagOf: Joi.string().required().label("Flag of"),
-		flagsGiven: Joi.required().label("Flags given to"),
+		password: passwordComplexity().required().label("Password")
 	});
 	return schema.validate(data);
 };
