@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const multer = require('multer');
+
 const employeesController = require('../controllers/employeesController');
 
 router.route('/')

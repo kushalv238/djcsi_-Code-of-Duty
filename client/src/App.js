@@ -1,17 +1,35 @@
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import VerticalNavbar from "./components/VerticalNavbar";
 import Navbar from "./components/Navbar";
 import HeroSection from "./pages/HeroSection";
 import Employee from './components/Employees';
 import Signup from "./components/Singup";
 import './stylesheets/home.css'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Login from "./components/Login";
+import jwtDecode from "jwt-decode";
+import axios from "axios";
+
+import getData from './getInfo/getEmployees'
+import Main from "./components/Main";
+// const getData = async (data) => {
+//     try {
+//         const response = await axios.post('http://localhost:3600/user', data);
+//         const responseData = response.data;
+//         console.log(responseData);
+//         return responseData;
+//     } catch (error) {
+//         console.error(error);
+//         throw error;
+//     }
+// };
 
 function App() {
-	const [page, setPage] = useState(0)
 	const user = localStorage.getItem("token");
-	const navigate = useNavigate();
+
+	// useEffect(()=>{
+	// 	console.log(data)
+	// }, [data])
 
 	if (!user) {
 		// window.location ='signup'
@@ -27,16 +45,7 @@ function App() {
 
 	return (
 		<div>
-			<main>
-				<VerticalNavbar page={page} setPage={setPage} />
-				<div className="main-content">
-					<Navbar />
-					<Routes>
-						<Route exact path="/" element={<HeroSection />} />
-						<Route exact path="/employees" element={<Employee />} />
-					</Routes>
-				</div>
-			</main>
+			<Main />
 		</div>
 	);
 }

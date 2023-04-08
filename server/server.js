@@ -6,6 +6,7 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const { logger, logEvents } = require('./middleware/logger');
@@ -19,6 +20,8 @@ connectDB();
 
 //built-in middleware
 app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 //3rd party middleware
@@ -33,6 +36,7 @@ app.use('/', require('./routes/root'));
 app.use("/login", require('./controllers/Login'));
 app.use("/signup", require('./controllers/Signup'));
 app.use('/employee', require('./routes/employeeRoutes'));
+app.use('/user', require('./routes/userRoutes'));
 
 app.all('*', (req, res) => {
     res.status(404);

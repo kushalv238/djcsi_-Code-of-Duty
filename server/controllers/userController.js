@@ -1,26 +1,20 @@
-const Employee = require('../model/Employee');
+const { User } = require('../model/User');
 const asyncHandler = require('express-async-handler');
-const multer = require('multer');
-const fs = require('fs');
-const path = require('path');
 
 
 // @desc Get users
-// @route GET /empoyee
+// @route GET /user
 // @access Private
-const getAEmployee = asyncHandler(async (req, res) => {
-    const { _id, first_name, aadhar_number, pan_number } = req.body;
+const getAUser = asyncHandler(async (req, res) => {
+    console.log(req.body)
+    const { _id  } = req.body;
     var getUser;
 
     if(_id) {
-        getUser = await Employee.find({ _id }).lean().exec();
+        getUser = await User.find({ _id });
     }
-    else if(first_name) {
-        getUser = await Employee.find({ first_name }).lean().exec();
-    } else if(aadhar_number) {
-        getUser = await Employee.find({ aadhar_number }).lean().exec();
-    } else {
-        getUser = await Employee.find({ pan_number }).lean().exec();
+    else {
+        return res.status(400).json({ message: "Enter userid" })
     }
 
     // if(!getUser?.length) {
@@ -31,46 +25,58 @@ const getAEmployee = asyncHandler(async (req, res) => {
 })
 
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads')
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now());
-    }
-});
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'uploads')
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, file.fieldname + '-' + Date.now());
+//     }
+// });
 
-const upload = multer({ storage: storage }).single('img')
+// const upload = multer({ storage: storage }).single('img')
 
 // @desc Post a new employee
 // @route POST /employee
 // @access Private
 const createNewEmployee = asyncHandler(async (req, res) => {
     console.log(req.body)
-    const { first_name, last_name, phone_number, current_address, resume = '', aadhar_number, pan_number, flags } = req.body;
+    const { _id  } = req.body;
+    var getUser;
 
-    if(![first_name, last_name, phone_number, aadhar_number, pan_number].every(Boolean)) {
-        return res.status(400).json({ message: "All correct feilds required" })
+    if(_id) {
+        getUser = await User.find({ _id });
     }
-
-    const getDuplicateEmployee = await Employee.find({ aadhar_number }).lean().exec();
-    if(getDuplicateEmployee?.length) {
-        return res.status(409).json({ message: 'Duplicate employee found' });
+    else {
+        return res.status(400).json({ message: "Enter userid" })
     }
+    res.json(getUser);
 
-    upload(req, res, err=> {
-        if(err) {
-            return res.status(200).json({message: `${err}`})
-        }
+//     console.log(req.body)
+//     const { first_name, last_name, phone_number, current_address, resume = '', aadhar_number, pan_number, flags } = req.body;
 
-        else {
-            const image = new Employee({
-                img: {data: req.file.filename, contentType: 'image/jpg'}, first_name, last_name, phone_number, current_address, resume , aadhar_number, pan_number, flags 
-            })
+//     if(![first_name, last_name, phone_number, aadhar_number, pan_number].every(Boolean)) {
+//         return res.status(400).json({ message: "All correct feilds required" })
+//     }
 
-            image.save().then(()=> res.status(200).json({ message: `${first_name} added to databse` }))
-        }
-    })
+//     const getDuplicateEmployee = await Employee.find({ aadhar_number }).lean().exec();
+//     if(getDuplicateEmployee?.length) {
+//         return res.status(409).json({ message: 'Duplicate employee found' });
+//     }
+
+//     upload(req, res, err=> {
+//         if(err) {
+//             return res.status(200).json({message: `${err}`})
+//         }
+
+//         else {
+//             const image = new Employee({
+//                 img: {data: req.file.filename, contentType: 'image/jpg'}, first_name, last_name, phone_number, current_address, resume , aadhar_number, pan_number, flags 
+//             })
+
+//             image.save().then(()=> res.status(200).json({ message: `${first_name} added to databse` }))
+//         }
+//     })
 
     // const newEmployeeObject = { img: {data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)), contentType: 'image/png'}, first_name, last_name, phone_number, current_address, resume , aadhar_number, pan_number, flags };
 
@@ -147,4 +153,4 @@ const deleteNote = asyncHandler(async (req, res) => {
 })
 
 
-module.exports = { getAEmployee, createNewEmployee, updateEmployee }
+module.exports = { getAUser, createNewEmployee }

@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const employeeSchema = new mongoose.Schema({
+    img:{
+        data: Buffer,
+        contentType: String
+    },
     first_name: {
         type: String,
         required: true
