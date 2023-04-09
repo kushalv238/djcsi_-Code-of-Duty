@@ -36,6 +36,7 @@ app.use('/', require('./routes/root'));
 app.use("/login", require('./controllers/Login'));
 app.use("/signup", require('./controllers/Signup'));
 app.use('/employee', require('./routes/employeeRoutes'));
+app.use('/employeeOf', require('./routes/employeeOfRoutes'));
 app.use('/user', require('./routes/userRoutes'));
 
 app.all('*', (req, res) => {

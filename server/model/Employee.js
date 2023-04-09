@@ -40,6 +40,9 @@ const employeeSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    workerType: {
+        type: String,
+    },
     flags: {
         red: {type: Number, default: 0},
         yellow: {type: Number, default: 0},

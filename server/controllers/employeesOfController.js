@@ -1,20 +1,26 @@
-const { User } = require('../model/User');
+const Employee = require('../model/Employee');
 const asyncHandler = require('express-async-handler');
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
 
 
 // @desc Get users
-// @route GET /user
+// @route GET /employee
 // @access Private
-const getAUser = asyncHandler(async (req, res) => {
-    console.log(req.body)
-    const { _id  } = req.body;
+const getAEmployee = asyncHandler(async (req, res) => {
+    const { _id, first_name, aadhar_number, pan_number } = req.body;
     var getUser;
 
-    if(_id) {
-        getUser = await User.find({ _id });
+    if (_id) {
+        getUser = await Employee.find({ _id }).lean().exec();
     }
-    else {
-        return res.status(400).json({ message: "Enter userid" })
+    else if (first_name) {
+        getUser = await Employee.find({ first_name }).lean().exec();
+    } else if (aadhar_number) {
+        getUser = await Employee.find({ aadhar_number }).lean().exec();
+    } else {
+        getUser = await Employee.find({ pan_number }).lean().exec();
     }
 
     // if(!getUser?.length) {
@@ -25,58 +31,31 @@ const getAUser = asyncHandler(async (req, res) => {
 })
 
 
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, 'uploads')
-//     },
-//     filename: (req, file, cb) => {
-//         cb(null, file.fieldname + '-' + Date.now());
-//     }
-// });
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now());
+    }
+});
 
-// const upload = multer({ storage: storage }).single('img')
+const upload = multer({ storage: storage }).single('img')
 
 // @desc Post a new employee
 // @route POST /employee
 // @access Private
-const createNewEmployee = asyncHandler(async (req, res) => {
-    const { _id  } = req.body;
-    var getUser;
+const getEmployeeInfo = asyncHandler(async (req, res) => {
+    const { _id } = req.body;
+    var getEmployee;
 
-    if(_id) {
-        getUser = await User.find({ _id });
+    if (_id) {
+        getEmployee = await Employee.find({ _id });
     }
     else {
         return res.status(400).json({ message: "Enter userid" })
     }
-    res.json(getUser);
-
-//     console.log(req.body)
-//     const { first_name, last_name, phone_number, current_address, resume = '', aadhar_number, pan_number, flags } = req.body;
-
-//     if(![first_name, last_name, phone_number, aadhar_number, pan_number].every(Boolean)) {
-//         return res.status(400).json({ message: "All correct feilds required" })
-//     }
-
-//     const getDuplicateEmployee = await Employee.find({ aadhar_number }).lean().exec();
-//     if(getDuplicateEmployee?.length) {
-//         return res.status(409).json({ message: 'Duplicate employee found' });
-//     }
-
-//     upload(req, res, err=> {
-//         if(err) {
-//             return res.status(200).json({message: `${err}`})
-//         }
-
-//         else {
-//             const image = new Employee({
-//                 img: {data: req.file.filename, contentType: 'image/jpg'}, first_name, last_name, phone_number, current_address, resume , aadhar_number, pan_number, flags 
-//             })
-
-//             image.save().then(()=> res.status(200).json({ message: `${first_name} added to databse` }))
-//         }
-//     })
-
+    res.json(getEmployee);
     // const newEmployeeObject = { img: {data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)), contentType: 'image/png'}, first_name, last_name, phone_number, current_address, resume , aadhar_number, pan_number, flags };
 
     // const addedEmployee = await Employee.create(newEmployeeObject)
@@ -104,12 +83,12 @@ const updateEmployee = asyncHandler(async (req, res) => {
     // if(!userID) {
     //     return res.status(400).json({ message: "No such user found" });
     // }
-    
+
     // const noteToUpdate = await Note.findById(id).exec();
     // if(!noteToUpdate) {
     //     return res.status(400).json({ message: "No such note found" });
     // }
-    
+
     // const findDuplicate = await Note.findOne({ title }).lean().exec();
     // if(findDuplicate && findDuplicate?._id.toString() !== id) {
     //     return res.status(409).json({ message: 'Duplicate note title' });
@@ -152,4 +131,4 @@ const deleteNote = asyncHandler(async (req, res) => {
 })
 
 
-module.exports = { getAUser, createNewEmployee }
+module.exports = { getEmployeeInfo }

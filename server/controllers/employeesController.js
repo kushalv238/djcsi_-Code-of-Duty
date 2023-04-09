@@ -6,7 +6,7 @@ const path = require('path');
 
 
 // @desc Get users
-// @route GET /empoyee
+// @route GET /employee
 // @access Private
 const getAEmployee = asyncHandler(async (req, res) => {
     const { _id, first_name, aadhar_number, pan_number } = req.body;
